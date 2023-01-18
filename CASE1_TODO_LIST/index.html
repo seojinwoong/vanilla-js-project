@@ -10,21 +10,60 @@
 </head>
 <body>
     <div id="todoWrap">
+        <div class="form_wrapper">
+            <form>
+                <input type="text" class="insert_todo_content" placeholder="Add your new todo">
+                <button><i class="fa-solid fa-plus"></i></button>
+            </form>
+        </div>
         <div class="todo_list_wrapper">
             <!-- todo_list_section -->
             <section class="todo_list_section">
                 <article class="left_sector">
-                    <input type="checkbox" class="done_check">
-                    <p class="todo_list_name">블라블라</p>
+                    <div class="standard_mode">
+                        <input type="checkbox" class="done_check">
+                        <p class="todo_list_name">블라블라</p>
+                    </div>
+                    <div class="update_mode"><input type="text" class="update_inputs"></div>
+                </article>
+                <article class="right_sector">
+                    <div class="standard_mode">
+                        <i class="fa-solid fa-pen update_todo"></i>
+                        <i class="fa-solid fa-trash delete_todo"></i>
+                    </div>
+                    <div class="update_mode">
+                        <i class="fa-solid fa-check update_todo_done"></i>
+                        <i class="fa-regular fa-xmark cancel_update_todo"></i>
+                    </div>
+                </article>
+            </section>
+            <!-- // todo_list_section -->
+            <!-- todo_list_section -->
+            <section class="todo_list_section">
+                <article class="left_sector">
+                    <div class="standard_mode">
+                        <input type="checkbox" class="done_check">
+                        <p class="todo_list_name">블라블라</p>
+                    </div>
+                    <div class="update_mode"><input type="text" class="update_inputs"></div>
+                </article>
+                <article class="right_sector">
+                    <div class="standard_mode">
+                        <i class="fa-solid fa-pen update_todo"></i>
+                        <i class="fa-solid fa-trash delete_todo"></i>
+                    </div>
+                    <div class="update_mode">
+                        <i class="fa-solid fa-check update_todo_done"></i>
+                        <i class="fa-regular fa-xmark cancel_update_todo"></i>
+                    </div>
                 </article>
             </section>
             <!-- // todo_list_section -->
         </div>
-        <div class="form_wrapper">
-            <form>
-                <input type="text" class="inser_todo_content">
-                <button><i class="fa-solid fa-plus"></i></button>
-            </form>
+        
+        <div class="btm_line">
+            <p class="all_counts"><span class="con">2</span>개의 todo list가 있습니다.</p>
+            <button class="clear_all_todo">Clear All Todo</button>
         </div>
     </div>
 

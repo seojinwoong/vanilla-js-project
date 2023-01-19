@@ -1,9 +1,24 @@
 {
   "todos": [
     {
-      "content": "테스트 1ㅛㅕㅛㅕ쇼ㅕㅛㅕ",
+      "content": "게시글1",
       "completed": true,
       "id": 1
+    },
+    {
+      "content": "게시글2",
+      "completed": true,
+      "id": 2
+    },
+    {
+      "content": "게시글3",
+      "completed": true,
+      "id": 3
+    },
+    {
+      "content": "게시글4",
+      "completed": true,
+      "id": 4
     }
   ]
 }

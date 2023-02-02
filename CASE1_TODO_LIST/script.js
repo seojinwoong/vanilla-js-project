@@ -45,7 +45,7 @@
         $todo_list_wrapper.innerHTML = '';
         todos.forEach(todo => {
             const todoEl = createTodoEl(todo);
-            $todo_list_wrapper.appendChild(todoEl);
+            $todo_list_wrapper.prepend(todoEl);
         });
         $all_counts.innerText = todos.length;
     }
@@ -79,6 +79,11 @@
 
     const updateTodo = (e) => {
         if (e.target.classList.contains('update_todo')) {
+            $todo_list_wrapper.querySelectorAll('.todo_list_section').forEach(todo_list => {
+                todo_list.classList.replace('update_mode', 'standard_mode');
+                const resetText = todo_list.querySelector('.todo_list_name').textContent;
+                todo_list.querySelector('.update_inputs').value = resetText;
+            });
             const clickedTodo = e.target.closest('.todo_list_section');
             clickedTodo.classList.replace('standard_mode', 'update_mode');
         }
@@ -101,12 +106,52 @@
         }
     } 
 
+    const updateCancelTodo = (e) => {
+        if (e.target.classList.contains('cancel_update_todo')) {
+            const clickedTodo = e.target.closest('.todo_list_section');
+            const resetText = clickedTodo.querySelector('.todo_list_name').textContent;
+            clickedTodo.classList.replace('update_mode', 'standard_mode');
+            clickedTodo.querySelector('.update_inputs').value = resetText;
+        }
+    }
+    
+    const toggleTodo = (e) => {
+        if (e.target.classList.contains('done_check')) {
+            const clickedTodo = e.target.closest('.todo_list_section');
+            const todoIdx = clickedTodo.dataset.todoid;
+            const completed = e.target.checked;
+            
+            fetch(`${API_URL}/${todoIdx}`, {
+                method: "PATCH",
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ completed })
+            }).then(response => response.json())
+              .then(getAllTodos)
+              .catch(error => console.error(error.message))
+        }
+    }
+
+    const removeTodo = (e) => {
+        if (e.target.classList.contains('delete_todo')) {
+            const clickedTodo = e.target.closest('.todo_list_section');
+            const todoIdx = clickedTodo.dataset.todoid;
+
+            fetch(`${API_URL}/${todoIdx}`, {
+                method: "DELETE"
+            }).then(response => response.json())
+              .then(getAllTodos)
+              .catch(error => console.log(error.message))
+        }
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
         getAllTodos();
         $todo_form.addEventListener('submit', insertTodo);
         $todo_list_wrapper.addEventListener('click', updateTodo);
         $todo_list_wrapper.addEventListener('click', updateDoneTodo);
-
+        $todo_list_wrapper.addEventListener('click', updateCancelTodo);
+        $todo_list_wrapper.addEventListener('click', toggleTodo);
+        $todo_list_wrapper.addEventListener('click', removeTodo);
     });
 
 })()
